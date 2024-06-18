@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
-import { ALL_BOOKS_LIST, CREATE_FORM, DETAILS_BUTTONS, DETAILS_DESCRIPTION, LOGGED_NAVBAR, LOGIN_FORM, NAVBAR } from './utils/locators';
-import { ALERT, BASE_URL, TEST_BOOK, TEST_URL, TEST_USER } from './utils/constants';
+import { ALL_BOOKS_LIST, CREATE_FORM, DETAILS_BUTTONS, DETAILS_DESCRIPTION, LOGGED_NAVBAR, LOGIN_FORM, NAVBAR, REGISTER_FORM } from './utils/locators';
+import { ALERT, BASE_URL, REG_TEST_USER, TEST_BOOK, TEST_URL, TEST_USER } from './utils/constants';
 //navigation
 test('verify "All Books" link is visible', async ({page}) => {
      await page.goto('http://localhost:3000');
@@ -138,6 +138,32 @@ test('Login with empty password field', async ({page})=>{
 
 //Register page
 
+test('Register with valid cridentials', async ({page})=>{
+    await page.goto(TEST_URL.TEST_REGISTER_URL);
+
+    await page.locator(REGISTER_FORM.REGISTER_EMAIL).fill(REG_TEST_USER.EMAIL);
+    await page.locator(REGISTER_FORM.REGISTER_PASSWORD).fill(REG_TEST_USER.PASSWORD);
+    await page.locator(REGISTER_FORM.REGISTER_REPEAT_PASSWORD).fill(REG_TEST_USER.PASSWORD);
+
+    await page.locator(REGISTER_FORM.REGISTER_SUBMIT_BUTTON).click();
+
+    await page.waitForURL(TEST_URL.TEST_CATALOG_URL);
+    expect(page.url()).toBe(TEST_URL.TEST_CATALOG_URL);
+});
+
+test('Register with empty input fields', async ({page})=>{
+    await page.goto(TEST_URL.TEST_REGISTER_URL);
+
+    await page.locator(REGISTER_FORM.REGISTER_SUBMIT_BUTTON).click();
+    page.on('dialog', async dialog =>{
+        expect(dialog.type()).toContain('alert');
+        expect(dialog.message()).toContain(ALERT.ALERT_MESSAGE);
+        await dialog.accept();
+    })
+
+    await page.waitForURL(TEST_URL.TEST_REGISTER_URL);
+    expect(page.url()).toBe(TEST_URL.TEST_REGISTER_URL);
+});
 
 
 //Add book page

@@ -15,6 +15,14 @@ const LOGIN_FORM = {
 
 }
 
+const REGISTER_FORM = {
+    REGISTER_FORM: '#register-form',
+    REGISTER_EMAIL: 'input[id="email"]',
+    REGISTER_PASSWORD: 'input[id="password"]',
+    REGISTER_REPEAT_PASSWORD: '#register-form input[id="repeat-pass"]',
+    REGISTER_SUBMIT_BUTTON: '#register-form input[type="submit"]'
+}
+
 const LOGGED_NAVBAR = {
     ER_EMAIL: '//span[text()="Welcome, peter@abv.bg"]',
     MY_BOOKS: 'a[href="/profile"]',
@@ -42,6 +50,7 @@ export{
     CREATE_FORM,
     ALL_BOOKS_LIST,
     DETAILS_BUTTONS,
-    DETAILS_DESCRIPTION
+    DETAILS_DESCRIPTION,
+    REGISTER_FORM
     
 }

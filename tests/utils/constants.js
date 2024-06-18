@@ -12,6 +12,11 @@ const TEST_USER = {
     PASSWORD: '123456'
 }
 
+const REG_TEST_USER = {
+    EMAIL: 'test3@abv.bg',
+    PASSWORD: '1234567'
+}
+
 const ALERT = {
     ALERT_MESSAGE: 'All fields are required!'
 }
@@ -34,5 +39,6 @@ export {
     TEST_URL,
     TEST_USER,
     ALERT,
-    TEST_BOOK
+    TEST_BOOK,
+    REG_TEST_USER
 }
